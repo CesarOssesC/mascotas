@@ -7,6 +7,18 @@ const listarMascotas = async () => {
     return await leerArchivo(archivo)
 }
 
+const agregarMascota = async (mascota) => {
+    const mascotas = await listarMascotas(archivo)
+    mascotas.push(mascota)
+    await escribirArchivo(archivo, mascotas)
+}
+
+const actualizarMascota = async (id, mascotaActualizada) => {
+    const mascotas = await leerArchivo(archivo)
+    const index = mascotas.findIndex(m => m.id === id)
+    mascotas[index] = {...mascotas[index], ...mascotaActualizada}
+    await escribirArchivo(archivo, mascotas)
+}
 
 
-module.exports = { listarMascotas }
+module.exports = { listarMascotas, agregarMascota, actualizarMascota }

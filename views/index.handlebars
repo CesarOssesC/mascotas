@@ -1,0 +1,57 @@
+<div class="container">
+    <h2 class="my-5 text-center">Formulario</h2>
+    <form action="/mascotas" method="POST" enctype="multipart/form-data" class="mb-5">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" name="nombre" id="nombre" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="especie" class="form-label">Especie</label>
+            <input type="text" name="especie" id="especie" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="raza" class="form-label">Raza</label>
+            <input type="text" name="raza" id="raza" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="number" name="edad" id="edad" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="dueno" class="form-label">Dueño</label>
+            <input type="text" name="dueno" id="dueno" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="ciudad" class="form-label">Ciudad</label>
+            <input type="text" name="ciudad" id="ciudad" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" name="foto" id="foto" class="form-control">
+        </div>
+        <button class="btn btn-primary">Crear Mascota</button>
+    </form>
+
+    <hr class="border border-primary border-3 opacity-75 mb-5">
+
+    <h1 class="mb-5 text-center">Listado de Mascotas</h1>
+    <div class="row">
+        {{#each mascotas as |mascota|}}
+            <div class="col-3">
+                <div class="card">
+                    <img src="/img/{{mascota.foto}}" alt="{{mascota.especie}} - {{mascota.nombre}}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{mascota.nombre}}</h5>
+                        <p class="card-text">{{mascota.especie}}</p>
+                        <p class="card-text">{{mascota.raza}}</p>
+                        <p class="card-text">{{mascota.edad}}</p>
+                        <p class="card-text">{{mascota.dueno}}</p>
+                        <p class="card-text">{{mascota.ciudad}}</p>
+                        <a href="/mascotas/{{mascota.id}}/editar" class="btn btn-warning">Editar</a>
+                        <button class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

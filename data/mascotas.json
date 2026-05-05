@@ -9,5 +9,16 @@
         "dueno": "César",
         "ciudad": "temuco",
         "foto": "leia.jpg"
+    },
+    {
+        "id": 3,
+        "fecha": 1777945156452,
+        "nombre": "Hija",
+        "especie": "gato",
+        "raza": "Carey",
+        "edad": "12",
+        "dueno": "Coni",
+        "ciudad": "Temuco",
+        "foto": "hija_1777945155537.jpg"
     }
 ]
