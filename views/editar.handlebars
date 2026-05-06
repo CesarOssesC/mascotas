@@ -1,0 +1,38 @@
+<div class="container">
+    <h2 class="my-5 text-center">Editar mascota: {{mascota.id}} - {{mascota.nombre}}</h2>
+
+    <form id="form-{{mascota.id}}" enctype="multipart/form-data" onsubmit="actualizarMascota(event, {{mascota.id}})" class="mb-5">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" value="{{mascota.nombre}}">
+        </div>
+        <div class="mb-3">
+            <label for="especie" class="form-label">Especie</label>
+            <input type="text" name="especie" id="especie" class="form-control" value="{{mascota.especie}}">
+        </div>
+        <div class="mb-3">
+            <label for="raza" class="form-label">Raza</label>
+            <input type="text" name="raza" id="raza" class="form-control" value="{{mascota.raza}}">
+        </div>
+        <div class="mb-3">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="number" name="edad" id="edad" class="form-control" value="{{mascota.edad}}">
+        </div>
+        <div class="mb-3">
+            <label for="dueno" class="form-label">Dueño</label>
+            <input type="text" name="dueno" id="dueno" class="form-control" value="{{mascota.dueno}}">
+        </div>
+        <div class="mb-3">
+            <label for="ciudad" class="form-label">Ciudad</label>
+            <input type="text" name="ciudad" id="ciudad" class="form-control" value="{{mascota.ciudad}}">
+        </div>
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" name="foto" id="foto" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Editar Mascota</button>
+    </form>
+    <a class="btn btn-dark" href="/">Volver al listado</a>
+</div>
+
+

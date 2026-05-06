@@ -11,14 +11,25 @@
         "foto": "leia.jpg"
     },
     {
-        "id": 3,
-        "fecha": 1777945156452,
-        "nombre": "Hija",
+        "id": 4,
+        "fecha": 1778028752302,
+        "nombre": "Garfield",
         "especie": "gato",
-        "raza": "Carey",
-        "edad": "12",
-        "dueno": "Coni",
+        "raza": "Naranjo",
+        "edad": "15",
+        "dueno": "John Bonachon",
         "ciudad": "Temuco",
-        "foto": "hija_1777945155537.jpg"
+        "foto": "garfield_1778028752090.jpg"
+    },
+    {
+        "id": 5,
+        "fecha": 1778028860276,
+        "nombre": "Odie",
+        "especie": "Perro",
+        "raza": "Beagle",
+        "edad": "15",
+        "dueno": "John Bonachon",
+        "ciudad": "Temuco",
+        "foto": "odie_1778028860090.png"
     }
 ]

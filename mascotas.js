@@ -20,5 +20,11 @@ const actualizarMascota = async (id, mascotaActualizada) => {
     await escribirArchivo(archivo, mascotas)
 }
 
+const eliminarMascota = async (id) => {
+    let mascotas = await leerArchivo(archivo)
+    mascotas = mascotas.filter(m => m.id !== id)
+    await escribirArchivo(archivo, mascotas)
+}
 
-module.exports = { listarMascotas, agregarMascota, actualizarMascota }
+
+module.exports = { listarMascotas, agregarMascota, actualizarMascota, eliminarMascota }

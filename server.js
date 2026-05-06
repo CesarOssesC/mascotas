@@ -4,7 +4,7 @@ const fileUpload = require('express-fileupload')
 const { Jimp } = require('jimp')
 const path = require('path')
 const fs = require('fs')
-const { listarMascotas, agregarMascota, actualizarMascota } = require('./mascotas')
+const { listarMascotas, agregarMascota, actualizarMascota, eliminarMascota } = require('./mascotas')
 const { generarId } = require('./contadorId')
 
 const app = express()
@@ -32,7 +32,13 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/mascotas/:id/editar', async (req, res) => {
-    
+    const id = parseInt(req.params.id)
+    const mascotas = await listarMascotas()
+    const mascota = mascotas.find(m => m.id === id )
+
+    if (!mascota) return res.status(404).send('Mascota no encontrada')
+
+    res.render('editar', { mascota })
 })
 
 app.post('/mascotas', async (req, res) => {
@@ -63,7 +69,53 @@ app.post('/mascotas', async (req, res) => {
 })
 
 app.put('/mascotas/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    const { nombre, especie, raza, edad, dueno, ciudad } = req.body
 
+    let nombreArchivo = null
+
+    if (req.files && req.files.foto) {
+        const foto = req.files.foto
+        nombreArchivo = `${nombre.trim().toLowerCase()}_${Date.now() + path.extname(foto.name)}`
+
+        const rutaGuardar = path.join(__dirname, 'public', 'img', nombreArchivo)
+
+        const imagen = await Jimp.read(foto.data)
+        await imagen.resize({ w: 300 }).write(rutaGuardar)
+    }
+
+    const mascotaActualizada = {
+        fecha: Date.now(),
+        nombre,
+        especie,
+        raza,
+        edad,
+        dueno,
+        ciudad,
+        ...(nombreArchivo && { foto: nombreArchivo })
+    }
+
+    await actualizarMascota(id, mascotaActualizada)
+    res.json({ok: true, message: "Mascota actualizada exitosamente!"})
+})
+
+app.delete('/mascotas/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+
+    const mascotas = await listarMascotas()
+    const mascota = mascotas.find(m => m.id === id)
+
+    const rutaImagen = path.join(__dirname, 'public', 'img', mascota.foto)
+    fs.unlink(rutaImagen, (err) => {
+        if (err) {
+            console.error('No se pudo eliminar la imagen', err)
+        } else {
+            console.log(`La imagen ${mascota.foto} ha sido eliminada exitosamente.`)
+        }
+    })
+
+    await eliminarMascota(id)
+    res.json({ ok: true, message: "Mascota eliminada exitosamente!" })
 })
 
 app.listen(PORT, () => console.log(`Servidor inicializado en http://localhost:${PORT}`))
